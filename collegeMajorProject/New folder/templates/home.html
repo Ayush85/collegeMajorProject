@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block start %}
+
+<!-- Question List -->
+
+<div class="container" style="  
+  height: calc(100vh - 15vh);
+  overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;">
+  {% for quest in quests %}
+  <div class="card mb-4" style="
+  margin-top: 0px;     border-radius: 1em; 	background-color: rgba(255, 255, 255, 0.6);
+	backdrop-filter:blur(20px); box-shadow: 10px 10px 5px 5px rgba(0, 0, 0, 0.4) ;
+">
+    <div class="card-body text-black">
+      <h4 class="card-title text-black"  >
+        <a href="/detail/{{quest.id}}" class = "text-black">{{quest.title}}</a>
+      </h4>
+      <p>
+        <a href="#" class="mr-2 text-black">{{quest.user.username}}</a>
+        <a href="/detail/{{quest.id}}" class="mr-2 text-black">{{quest.answer_set.count}} Answers</a>
+        <a href="/detail/{{quest.id}}" class="mr-2 text-black">{{quest.total_comments}} Comments</a>
+      </p>
+    </div>
+    <div class="card-footer">
+      <small>{{quest.add_time}}</small>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% if quests.has_other_pages %}
+<!-- Pagination -->
+<nav class="my-3 ">
+    <ul class="pagination" style="flex-direction: row;justify-content: center;">
+        {% if quests.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{quests.previous_page_number}}" style="background-color:#ffffff8a;" >Previous</a></li>
+      {% endif %}
+      {% for i in quests.paginator.page_range %}
+      {% if quests.number == i %}
+      <li class="page-item active"><a class="page-link" href="#" >{{i}}</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{i}}" style="background-color:#ffffff8a;">{{i}}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if quests.has_next %}
+      <li class="page-item" ><a class="page-link" href="?page={{quests.next_page_number}}" style="background-color:#ffffff8a;">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% endblock %}

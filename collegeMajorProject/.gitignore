@@ -2,3 +2,5 @@ trans
 all_savel_weights
 bert-base-uncaseddd
 july17
+info.py
+db.sqlite3

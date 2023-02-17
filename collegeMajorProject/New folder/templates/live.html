@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+    {% block start %}
+<div style="margin:20vh">
+<form form action="/live" method="post">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="textField1">Text1</label>
+    <input type="text" name = "textField1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+    </div>
+  <div class="form-group">
+    <label for="textField2">Text2</label>
+    <input type="text" name="textField2" class="form-control" id="exampleInputPassword1" >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form><br>
+
+         {% if messages %}
+         <div >
+    		{% for message in messages %}
+			
+      			<span class="{{ message.tags }}">{{ message }}</span>
+    		{% endfor %}
+    		</div>
+        {% endif %}
+
+</div>
+    {% endblock %}
